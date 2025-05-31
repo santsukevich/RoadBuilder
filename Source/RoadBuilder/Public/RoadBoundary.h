@@ -44,7 +44,7 @@ public:
 	bool IsZeroOffset(int Index);
 	void SetZeroOffset(double Start, double End);
 	void Join(URoadBoundary* Boundary);
-	void Cut(double R_Start, double R_End);
+	void Cut(double R_Start, double R_End) override;
 	double& SegmentStart(int i) { return Segments[i].Dist; }
 	double& SegmentEnd(int i) { return i + 1 < Segments.Num() ? Segments[i + 1].Dist : Length(); }
 	URoadLane*& GetLane(int Side) { return Side ? LeftLane : RightLane; }

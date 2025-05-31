@@ -14,7 +14,7 @@ class ROADBUILDER_API USettings_Base : public UObject
 	GENERATED_BODY()
 public:
 #if WITH_EDITOR
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent);
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 };
 

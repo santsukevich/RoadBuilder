@@ -42,7 +42,7 @@ public:
 		return 0;
 	}
 	UPROPERTY(EditAnywhere, Category = Element)
-	uint64 Id;
+	uint64 Id = 0;
 
 	UPROPERTY(EditAnywhere, Category = Element)
 	TMap<FName, FString> Tags;
@@ -58,8 +58,8 @@ public:
 	void Build(AOSMActor* OSM);
 	
 	UPROPERTY(EditAnywhere, Category = Node)
-	FVector2D Lonlat;
-	FVector Pos;
+	FVector2D Lonlat {};
+	FVector Pos {};
 	TArray<uint64> Ways;
 };
 
@@ -78,6 +78,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Way)
 	TArray<uint64> Nodes;
 	FPolyline Curve;
+	UPROPERTY(EditAnywhere, Category = Road)
 	ARoadActor* Road = nullptr;
 };
 

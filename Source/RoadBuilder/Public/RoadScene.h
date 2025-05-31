@@ -202,7 +202,7 @@ public:
 	bool Contains(ARoadActor* Road, double Dist);
 	void FixHeight(FPolyline& Polyline);
 	void FixHeight(TArray<FVector>& Points);
-	void Join(AJunctionActor* Junction);
+	// void Join(AJunctionActor* Junction);
 	void Update(TOctree2<FRoadOctreeElement, FRoadOctreeSemantics>& Octree);
 	void UpdateCorner(FJunctionGate& SrcGate, double SrcDist, FJunctionGate& DstGate, double DstDist);
 	FJunctionGate& AddGate(ARoadActor* Road, double Dist, double Sign);

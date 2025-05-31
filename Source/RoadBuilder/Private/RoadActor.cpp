@@ -867,13 +867,12 @@ TArray<FHeightSegment> ARoadActor::CutHeightSegments(double R_Start, double R_En
 
 void ARoadActor::AddArcs(const FVector2D& SrcPos, const FVector2D& SrcDir, const FVector2D& DstPos, const FVector2D& DstDir, double Radius, double StartH, double EndH)
 {
-	double PrevMinSize, NextMinSize, PrevMaxSize, NextMaxSize;
 	double Distance = FVector2D::Distance(SrcPos, DstPos);
-	PrevMinSize = NextMinSize = 0;
-	PrevMaxSize = NextMaxSize = Distance;
+	double PrevMinSize = 0.0L, NextMinSize = 0.0L;
+	double PrevMaxSize = Distance, NextMaxSize = Distance;
 	double PrevSize = (PrevMinSize + PrevMaxSize) / 2;
 	double NextSize = (NextMinSize + NextMaxSize) / 2;
-	double Half, Radian, PrevDiff, NextDiff;
+	double Half = 0.0L, Radian = 0.0L, PrevDiff = 0.0L, NextDiff = 0.0L;
 	double SrcRadian = FMath::Atan2(SrcDir.Y, SrcDir.X);
 	double DstRadian = FMath::Atan2(DstDir.Y, DstDir.X);
 	for (int i = 0; i < 100; i++)
@@ -1062,22 +1061,24 @@ void ARoadActor::AddSubRoad(URoadBoundary* Boundary, double Start, double End, d
 				SrcL = SrcL->GetBoundary(SrcSide)->GetLane(SrcSide);
 			}
 		};
-		if (true)
-		{
-			CopyAllOffset(0, Sign > 0 ? 0 : 1);
-			CopyAllOffset(1, Sign > 0 ? 1 : 0);
-		}
-		else
-		{
-			for (URoadBoundary* DstB : Boundaries)
-			{
-				if (DstB != BaseCurve)
-				{
-					DstB->LocalOffsets.Add({ Length(), DstB->LocalOffsets.Last().Offset });
-					DstB->CleanLocalOffsets();
-				}
-			}
-		}
+		CopyAllOffset(0, Sign > 0 ? 0 : 1);
+		CopyAllOffset(1, Sign > 0 ? 1 : 0);
+		// if (true)
+		// {
+		// 	CopyAllOffset(0, Sign > 0 ? 0 : 1);
+		// 	CopyAllOffset(1, Sign > 0 ? 1 : 0);
+		// }
+		// else
+		// {
+		// 	for (URoadBoundary* DstB : Boundaries)
+		// 	{
+		// 		if (DstB != BaseCurve)
+		// 		{
+		// 			DstB->LocalOffsets.Add({ Length(), DstB->LocalOffsets.Last().Offset });
+		// 			DstB->CleanLocalOffsets();
+		// 		}
+		// 	}
+		// }
 	}
 }
 
@@ -1636,9 +1637,9 @@ void ARoadActor::ExportXodr(FXmlNode* XmlNode, int& RoadId, int& ObjectId, int J
 			double End = Keys[j + 1];
 			FXmlNode* SectionNode = XmlNode_CreateChild(LanesNode, TEXT("laneSection"));
 			XmlNode_AddAttribute(SectionNode, TEXT("s"), (Start - R_Start) * 0.01);
-			auto ExportLane = [&](FXmlNode* XmlNode, URoadLane* Lane, URoadBoundary* Boundary, URoadBoundary* WidthBoundary, int LaneId)
+			auto ExportLane = [&](FXmlNode* Node, URoadLane* Lane, URoadBoundary* Boundary, URoadBoundary* WidthBoundary, int LaneId)
 			{
-				FXmlNode* LaneNode = XmlNode_CreateChild(XmlNode, TEXT("lane"));
+				FXmlNode* LaneNode = XmlNode_CreateChild(Node, TEXT("lane"));
 				XmlNode_AddAttribute(LaneNode, TEXT("id"), LaneId);
 				if (Lane)
 					Lane->ExportXodr(LaneNode, Start, End);
@@ -1669,6 +1670,7 @@ void ARoadActor::ExportXodr(FXmlNode* XmlNode, int& RoadId, int& ObjectId, int J
 		ObjectNodes.Add(XmlNode_CreateChild(RoadNode, TEXT("objects")));
 		RoadRange.Add(FVector2D(R_Start, R_End));
 	}
+#if 0
 	auto FindNearestSegment = [&](double Dist)->int
 	{
 		int MinIndex = -1;
@@ -1690,7 +1692,6 @@ void ARoadActor::ExportXodr(FXmlNode* XmlNode, int& RoadId, int& ObjectId, int J
 	};
 	for (URoadMarking* Marking : Markings)
 	{
-#if 0
 		FVector2D Center = Object->Center();
 		FVector2D Size = Object->Size();
 		FVector Dir = BaseCurve->Curve.GetDir(Center.X);
@@ -1703,8 +1704,8 @@ void ARoadActor::ExportXodr(FXmlNode* XmlNode, int& RoadId, int& ObjectId, int J
 		XmlNode_AddAttribute(ObjectNode, TEXT("hdg"), -Radian);
 		XmlNode_AddAttribute(ObjectNode, TEXT("width"), Size.Y * 0.01);
 		XmlNode_AddAttribute(ObjectNode, TEXT("length"), Size.X * 0.01);
-#endif
 	}
+#endif
 }
 
 void ARoadActor::Serialize(FArchive& Ar)

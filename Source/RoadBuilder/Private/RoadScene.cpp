@@ -506,9 +506,9 @@ void AJunctionActor::BuildGoreMarkings()
 					ARoadActor* MarkingRoad = SrcConn != INDEX_NONE ? DstBoundary->GetRoad() : SrcBoundary->GetRoad();
 					auto AddPoints = [&](const FPolyline& Curve)
 					{
-						for (int i = 0; i < Curve.Points.Num() - 1; i++)
+						for (int l = 0; l < Curve.Points.Num() - 1; l++)
 						{
-							FVector2D UV = MarkingRoad->GetUV(Curve.Points[i].Pos);
+							FVector2D UV = MarkingRoad->GetUV(Curve.Points[l].Pos);
 							if (IsUVValid(UV))
 								Points.Add(UV);
 						}

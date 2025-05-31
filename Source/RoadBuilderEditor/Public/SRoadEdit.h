@@ -48,7 +48,7 @@ public:
 	void OnMarkingCurvePointPropertyChanged(const FPropertyChangedEvent& PropertyChangedEvent, UMarkingCurve* Marking, int Index);
 	void OnGroundPointPropertyChanged(const FPropertyChangedEvent& PropertyChangedEvent, AGroundActor* Ground, int Index);
 private:
-	FEdModeRoad* RoadEditMode;
+	FEdModeRoad* RoadEditMode = nullptr;
 	TSharedPtr<IDetailsView> SettingsView;
 	TSharedPtr<IDetailsView> ObjectDetailsView;
 	TSharedPtr<IStructureDetailsView> StructDetailsView;

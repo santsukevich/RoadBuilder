@@ -61,7 +61,7 @@ public:
 	void SnapSegment(int Index);
 	bool SnapSegment(double& Dist, double Tolerance = 100.0);
 	void Join(URoadLane* Lane);
-	void Cut(double R_Start, double R_End);
+	void Cut(double R_Start, double R_End) override;
 	double& SegmentStart(int i) { return Segments[i].Dist; }
 	double& SegmentEnd(int i) { return i + 1 < Segments.Num() ? Segments[i + 1].Dist : Length(); }
 	double GetWidth(double Dist) { return FMath::Abs(LeftBoundary->GetOffset(Dist) - RightBoundary->GetOffset(Dist)); }

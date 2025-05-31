@@ -470,7 +470,7 @@ static double sin_Asymptotic_Series(double x)
     double term[NUM_ASYMPTOTIC_TERMS + 1];
     double epsilon = LDBL_EPSILON / 4.0L;
     int j = 5;
-    int i = 0;
+    int i;
     term[0] = 1.0L;
     term[NUM_ASYMPTOTIC_TERMS] = 0.0L;
     for (i = 1; i < NUM_ASYMPTOTIC_TERMS; i++)
@@ -735,7 +735,7 @@ static double xChebyshev_Tn_Series(double x, const double a[], int degree)
 {
     double yp2 = 0.0L;
     double yp1 = 0.0L;
-    double y = 0.0L;
+    double y;
     double two_x = x + x;
     int k;
     // Check that degree >= 0.  If not, then return 0. //
@@ -961,7 +961,7 @@ static double cos_Asymptotic_Series(double x)
     double term[NUM_ASYMPTOTIC_TERMS + 1];
     double epsilon = LDBL_EPSILON / 4.0L;
     int j = 3;
-    int i = 0;
+    int i;
     term[0] = 1.0L;
     term[NUM_ASYMPTOTIC_TERMS] = 0.0L;
     for (i = 1; i < NUM_ASYMPTOTIC_TERMS; i++)

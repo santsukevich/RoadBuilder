@@ -45,10 +45,10 @@ struct FMarkingCurvePoint
 	{
 		switch (Index)
 		{
-		case 1: return Pos + In;
-		case 2: return Pos + Out;
+			case 1: return Pos + In;
+			case 2: return Pos + Out;
+			default: return Pos;
 		}
-		return Pos;
 	}
 	void ApplyDelta(int Index, const FVector2D& Delta)
 	{

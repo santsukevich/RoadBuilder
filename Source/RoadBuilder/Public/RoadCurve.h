@@ -179,7 +179,7 @@ struct FPolyline
 	}
 	FVector GetStraightDir(int i) const
 	{
-		FVector Prev, Next;
+		FVector Prev = FVector::ZeroVector, Next = FVector::ZeroVector;
 		if (i > 0)
 			Prev = (Points[i].Pos - Points[i - 1].Pos).GetSafeNormal();
 		if (i < Points.Num() - 1)
@@ -192,7 +192,7 @@ struct FPolyline
 	}
 	FVector GetStraightRight(int i) const
 	{
-		FVector Prev, Next;
+		FVector Prev = FVector::ZeroVector, Next = FVector::ZeroVector;
 		if (i > 0)
 			Prev = (Points[i].Pos - Points[i - 1].Pos).GetSafeNormal();
 		if (i < Points.Num() - 1)
@@ -535,7 +535,7 @@ public:
 	void UpdateOffsets(URoadCurve* SrcCurve, URoadCurve* DstCurve, int Side);
 	void DeleteOffset(int Index);
 	void Join(URoadCurve* RoadCurve);
-	void Cut(double R_Start, double R_End);
+	virtual void Cut(double R_Start, double R_End);
 	static TArray<FCurveOffset> CutOffsets(const TArray<FCurveOffset>& Offsets, double R_Start, double R_End);
 	TArray<FCurveOffset> CutLocalOffsets(double R_Start, double R_End) { return CutOffsets(LocalOffsets, R_Start, R_End); }
 	TArray<FCurveOffset> CutOffsets(double R_Start, double R_End) { return CutOffsets(Offsets, R_Start, R_End); }

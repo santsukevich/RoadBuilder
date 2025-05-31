@@ -1,0 +1,58 @@
+### Ignore by file extension
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Python cache files
+*.pyc
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.ipa
+
+### Ignore Unreal generated files
+
+# Binary Files
+Binaries/*
+
+# Compiled source files for the engine to use
+Intermediate/*
+
+# Ignore separately distributed assets
+Content/Textures
+Content/Meshes
+Content/Materials
+Content/Maps
+
+# Don't ignore plugins' dependencies
+!Source/**/*.lai
+!Source/**/*.la
+!Source/**/*.a
+!Source/**/*.lib
+!Source/**/*.so
+!Source/**/*.dylib
+!Source/**/*.dll
+!Source/**/*.aar
